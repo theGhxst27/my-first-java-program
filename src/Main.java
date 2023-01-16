@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -23,7 +24,7 @@ public class Main {
 
     public static void battle(String name){
         // boring dialoge nobody cares
-        System.out.println("Your options are a (attack) or r (run) \n========================================= \nYour Health: " + usrH + "| Your Attack: " + usrA);
+        System.out.println("Your options are a (attack) or r (run) \n========================================= \nYour Health: " + usrH + " | Your Attack: " + usrA);
         System.out.println(name + "'s Health: " + enmH + " | " + name + "'s Attack: " + enmA + "\n=========================================");
         
         // the fun part (your attack)
@@ -51,15 +52,29 @@ public class Main {
             double rand_doub1 = Math.random();
             if (rand_doub1 >= 0.5){
                 System.out.println("It works! \nYou swallow your pride and escape unharmed");
-            } else {
-                System.out.println("It fails! \nThe enemy attacks you for your cowardice!");
-                updateHealth(10, 0);
+            } if (rand_doub1 <= 0.5) {
+                System.out.println("It fails!");
             }
         }
 
-        // wow that was a lot, now let's do the enemy's attack
-        
-
+        // wow that was a lot, now the enemy's attack 
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("\n \n \n========================================= \nThe enemy readies an attack!");
+        double rand_doub2 = Math.random();
+        if (rand_doub2 >= 0.5){
+            System.out.println("It hits!");
+            updateHealth(enmA, 0);
+        } else if (rand_doub2 <= 0.2){
+            System.out.println("It hits! And it crits!");
+            updateHealth(enmA+20, 0);
+        } else {
+            System.out.println("It fails!");
+            updateHealth(0, 0);
+        }
     }
 
     public static void updateHealth(int h, int h2){
@@ -70,5 +85,4 @@ public class Main {
         System.out.println("Enemy's Health: " + enmH + " | Enemy's' Attack: " + 10);
         System.out.println("=========================================");
     }
-
 }
