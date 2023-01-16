@@ -75,6 +75,11 @@ public class Main {
             System.out.println("It fails!");
             updateHealth(0, 0);
         }
+        
+        if (usrH <= 0 || enmH <= 0){
+            
+        }
+        battle(name);
     }
 
     public static void updateHealth(int h, int h2){
